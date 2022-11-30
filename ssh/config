@@ -1,0 +1,4 @@
+Host carash.github.com
+    HostName github.com
+    User git
+    IdentityFile ~/.ssh/carash_rsa
