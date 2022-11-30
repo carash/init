@@ -1,0 +1,45 @@
+# Copyright 2017 Google Inc.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     https://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+alias tf='terraform'
+alias tfd='terraform destroy'
+alias tff='terraform fmt'
+alias tfg='terraform graph'
+alias tfim='terraform import'
+alias tfi='terraform init'
+alias tfiu='terraform init -upgrade'
+alias tfpr='terraform providers'
+alias tfp='terraform plan'
+alias tfa='terraform apply'
+alias tfaa='terraform apply -auto-approve'
+alias tfo='terraform output'
+alias tfr='terraform refresh'
+alias tfc='terraform console'
+alias tfsh='terraform show'
+alias tft='terraform taint'
+alias tfut='terraform untaint'
+alias tfv='terraform validate'
+alias tffu='terraform force-unlock'
+alias tfw='terraform workspace'
+alias tfwn='terraform workspace new'
+alias tfws='terraform workspace select'
+alias tfwl='terraform workspace list'
+alias tfwsh='terraform workspace show'
+alias tfwd='terraform workspace delete'
+alias tfs='terraform state'
+alias tfss='terraform state show'
+alias tfsl='terraform state pull'
+alias tfsp='terraform state push'
+alias tfsmv='terraform state mv'
+alias tfsrm='terraform state rm'
