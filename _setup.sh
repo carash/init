@@ -31,6 +31,12 @@ _setup_keys() {
   GPG_KEY_ID=$(gpg2 --list-secret-keys --keyid-format=long | grep -m 1 sec | sed -n 's/^.*[a-z0-9]*\/\([A-Z0-9]*\).*/\1/p')
 }
 
+_setup_ssh() {
+  sudo apt install -y openssh-client
+
+  cp ssh/config ~/.ssh/config
+}
+
 _setup_git() {
   type -p curl >/dev/null || sudo apt install curl -y
   curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | sudo dd of=/usr/share/keyrings/githubcli-archive-keyring.gpg \
@@ -57,9 +63,9 @@ _install_vim() {
   sudo apt install -y vim
 
   git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-  mv vim/.vimrc ${HOME}/.vimrc
+  cp vim/.vimrc ${HOME}/.vimrc
 
-  env SHELL=(which sh) vim +BundleInstall! +BundleClean +qall
+  env SHELL=$(which sh) vim +BundleInstall! +BundleClean +qall
 
   cat>>~/.zshrc <<EOF
 
@@ -148,7 +154,7 @@ _setup_aliases() {
   echo "alias v='vim'" >> ~/.zshrc
   echo "alias gcmm='git commit -m'" >> ~/.zshrc
 
-  mv aliases/.kubectl_aliases && echo "source ~/.kubectl_aliases" >> ~/.zshrc
-  mv aliases/.terraform_aliases && echo "source ~/.terraform_aliases" >> ~/.zshrc
-  mv aliases/.terragrunt_aliases && echo "source ~/.terragrunt_aliases" >> ~/.zshrc
+  cp aliases/.kubectl_aliases ~/.kubectl_aliases && echo "source ~/.kubectl_aliases" >> ~/.zshrc
+  cp aliases/.terraform_aliases ~/.terraform_aliases && echo "source ~/.terraform_aliases" >> ~/.zshrc
+  cp aliases/.terragrunt_aliases ~/.terragrunt_aliases && echo "source ~/.terragrunt_aliases" >> ~/.zshrc
 }
