@@ -22,7 +22,8 @@ _install_zsh() {
   sed -i 's/^ZSH_THEME=.*$/ZSH_THEME="powerlevel10k\/powerlevel10k"/g' ~/.zshrc
 
   git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
-  sed -i 's/^plugins=.*$/plugins=(git aws zsh-syntax-highlighting)/g' ~/.zshrc
+  git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+  sed -i 's/^plugins=.*$/plugins=(git aws zsh-syntax-highlighting zsh-autosuggestions)/g' ~/.zshrc
 }
 
 _setup_keys() {
@@ -69,10 +70,9 @@ _install_vim() {
 
   cat>>~/.zshrc <<EOF
 
-function updatevim
-    set -lx SHELL (which sh)
-    vim +BundleInstall! +BundleClean +qall
-end
+updatevim() {
+  SHELL=$(which sh) vim +BundleInstall! +BundleClean +qall
+}
 EOF
 }
 

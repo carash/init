@@ -1,4 +1,4 @@
-sudo apt install ca-certificates git curl jq
+sudo apt install -y ca-certificates tmux git curl jq
 
 bash -c "source _setup.sh && _install_zsh"
 bash -c "source _setup.sh && _setup_keys"
