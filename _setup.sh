@@ -122,6 +122,9 @@ _install_kube() {
   ln -s /opt/kubectx/completion/_kubectx.zsh ~/.oh-my-zsh/completions/_kubectx.zsh
   ln -s /opt/kubectx/completion/_kubens.zsh ~/.oh-my-zsh/completions/_kubens.zsh
 
+  git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+  echo y | ~/.fzf/install
+
   K9S_VERSION=$(__get_latest_release "derailed/k9s")
   wget https://github.com/derailed/k9s/releases/download/${K9S_VERSION}/k9s_Linux_x86_64.tar.gz
   mkdir -p k9s
