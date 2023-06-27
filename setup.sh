@@ -1,3 +1,5 @@
+set -e
+
 sudo apt install -y ca-certificates tmux git curl jq
 
 bash -c "source _setup.sh && _install_zsh"

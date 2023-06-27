@@ -27,7 +27,8 @@ _install_zsh() {
 }
 
 _setup_keys() {
-  [[ ! -f ~/.ssh/id_rsa ]] && ssh-keygen -t rsa -b 4096
+  sudo apt install -y gnupg2
+  [[ ! -f ~/.ssh/id_ed25519 ]] && ssh-keygen -t ed25519
   [[ ! $(gpg2 -k | grep -w uid) ]] && gpg2 --full-generate-key
   GPG_KEY_ID=$(gpg2 --list-secret-keys --keyid-format=long | grep -m 1 sec | sed -n 's/^.*[a-z0-9]*\/\([A-Z0-9]*\).*/\1/p')
 }
@@ -47,17 +48,19 @@ _setup_git() {
     && sudo apt install gh -y
 
   GPG_KEY_ID=$(gpg2 --list-secret-keys --keyid-format=long | grep -m 1 sec | sed -n 's/^.*[a-z0-9]*\/\([A-Z0-9]*\).*/\1/p')
-  read -p 'Git email:' GIT_EMAIL
+  read -p 'Git user  : ' GIT_USER
+  read -p 'Git email : ' GIT_EMAIL
 
-  git config --global user.name "Wibisana Bramawidya"
-  git config --global user.email ${GIT_EMAIL}
-  git config --global user.signingkey ${GPG_KEY_ID}
+  git config --global core.editor vim
+  git config --global user.name "${GIT_USER}"
+  git config --global user.email "${GIT_EMAIL}"
+  git config --global user.signingkey "${GPG_KEY_ID}"
   git config --global commit.gpgsign true
 
   gpg2 --armor --export ${GPG_KEY_ID}
 
   [ -f ~/.zshrc ] && echo >> ~/.zshrc
-  [ -f ~/.zshrc ] && echo 'export GPG_TTY=$(tty)' >> ~/.zshrc
+  [ -f ~/.zshrc ] && echo 'export GPG_TTY=$(echo $TTY)' >> ~/.zshrc
 }
 
 _install_vim() {
@@ -140,7 +143,7 @@ _install_asdf() {
   cat >>~/.zshrc <<EOF
 
 # append completions to fpath
-fpath=(${ASDF_DIR}/completions $fpath)
+fpath=(${ASDF_DIR}/completions \$fpath)
 # initialise completions with ZSH's compinit
 autoload -Uz compinit && compinit
 EOF
